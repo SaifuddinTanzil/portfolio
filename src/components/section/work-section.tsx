@@ -8,15 +8,38 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { DATA } from "@/data/resume";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight, Activity, Sigma, Atom, Building2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-function LogoImage({ src, alt }: { src: string; alt: string }) {
+function LogoImage({ src, alt, iconType }: { src?: string; alt: string; iconType?: string }) {
   const [imageError, setImageError] = useState(false);
 
   if (!src || imageError) {
+    if (iconType === "brac" || alt.toLowerCase().includes("brac")) {
+      return (
+        <div className="size-8 md:size-10 p-1.5 border rounded-full shadow ring-2 ring-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center flex-none">
+          <Activity className="size-4 md:size-5" />
+        </div>
+      );
+    }
+    if (iconType === "math" || alt.toLowerCase().includes("town") || alt.toLowerCase().includes("math")) {
+      return (
+        <div className="size-8 md:size-10 p-1.5 border rounded-full shadow ring-2 ring-indigo-500/30 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center flex-none">
+          <Sigma className="size-4 md:size-5" />
+        </div>
+      );
+    }
+    if (iconType === "physics" || alt.toLowerCase().includes("coach") || alt.toLowerCase().includes("physics")) {
+      return (
+        <div className="size-8 md:size-10 p-1.5 border rounded-full shadow ring-2 ring-purple-500/30 bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center flex-none">
+          <Atom className="size-4 md:size-5" />
+        </div>
+      );
+    }
     return (
-      <div className="size-8 md:size-10 p-1 border rounded-full shadow ring-2 ring-border bg-muted flex-none" />
+      <div className="size-8 md:size-10 p-1.5 border rounded-full shadow ring-2 ring-border bg-muted flex items-center justify-center flex-none text-muted-foreground">
+        <Building2 className="size-4 md:size-5" />
+      </div>
     );
   }
 
@@ -42,7 +65,7 @@ export default function WorkSection() {
           <AccordionTrigger className="hover:no-underline p-0 cursor-pointer transition-colors rounded-none group [&>svg]:hidden">
             <div className="flex items-center gap-x-3 justify-between w-full text-left">
               <div className="flex items-center gap-x-3 flex-1 min-w-0">
-                <LogoImage src={work.logoUrl} alt={work.company} />
+                <LogoImage src={work.logoUrl} alt={work.company} iconType={(work as any).iconType} />
                 <div className="flex-1 min-w-0 gap-0.5 flex flex-col">
                   <div className="font-semibold leading-none flex items-center gap-2">
                     {work.company}
@@ -76,7 +99,7 @@ export default function WorkSection() {
               </div>
             </div>
           </AccordionTrigger>
-          <AccordionContent className="p-0 ml-13 text-xs sm:text-sm text-muted-foreground">
+          <AccordionContent className="p-0 ml-11 md:ml-13 text-xs sm:text-sm text-muted-foreground leading-relaxed pt-2">
             {work.description}
           </AccordionContent>
         </AccordionItem>
@@ -84,4 +107,3 @@ export default function WorkSection() {
     </Accordion>
   );
 }
-

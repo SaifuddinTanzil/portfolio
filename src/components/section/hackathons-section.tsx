@@ -5,6 +5,10 @@ import { DATA } from "@/data/resume";
 import { Timeline, TimelineItem, TimelineConnectItem } from "@/components/timeline";
 
 export default function HackathonsSection() {
+  if (!DATA.hackathons || DATA.hackathons.length === 0) {
+    return null;
+  }
+
   return (
     <section id="hackathons" className="overflow-hidden">
       <div className="flex min-h-0 flex-col gap-y-8 w-full">
@@ -26,7 +30,18 @@ export default function HackathonsSection() {
           </div>
         </div>
         <Timeline>
-          {DATA.hackathons.map((hackathon) => (
+          {(DATA.hackathons as readonly {
+            title: string;
+            dates: string;
+            location?: string;
+            description?: string;
+            image?: string;
+            links?: readonly {
+              title?: string;
+              icon?: React.ReactNode;
+              href: string;
+            }[];
+          }[]).map((hackathon) => (
             <TimelineItem key={hackathon.title + hackathon.dates} className="w-full flex items-start justify-between gap-10">
               <TimelineConnectItem className="flex items-start justify-center">
                 {hackathon.image ? (

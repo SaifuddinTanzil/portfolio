@@ -23,12 +23,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
   title: {
-    default: DATA.name,
+    default: `${DATA.name} — Technical & Data Analyst | ML & Web Developer`,
     template: `%s | ${DATA.name}`,
   },
   description: DATA.description,
   openGraph: {
-    title: `${DATA.name}`,
+    title: `${DATA.name} — Technical & Data Analyst | ML & Web Developer`,
     description: DATA.description,
     url: DATA.url,
     siteName: `${DATA.name}`,
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: `${DATA.name}`,
+    title: `${DATA.name} — Technical & Data Analyst | ML & Web Developer`,
     card: "summary_large_image",
   },
   verification: {
